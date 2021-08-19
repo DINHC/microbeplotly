@@ -1,4 +1,4 @@
-function buildCharts(sample) {
+function Charts(sample) {
       d3.json("samples.json").then((data) => {
       var sample= data.samples;
       
@@ -10,4 +10,23 @@ function buildCharts(sample) {
       var labels = result.otu_labels;
       var values = result.sample_values;
       });
-}
+      }
+
+      var bar =[
+      {
+            y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+            x:values.slice(0,10).reverse(),
+            text:labels.slice(0,10).reverse(),
+            type:"bar",
+            orientation:"h"
+  
+      }
+      ];
+
+      var barshape = {
+            title: "Top 10 Bacteria Found in Your Belly Button",
+            margin: { t: 50, l: 180 }
+            };
+        
+      Plotly.newPlot("bar", bar, barshape);
+      
