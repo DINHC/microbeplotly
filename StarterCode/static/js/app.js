@@ -62,4 +62,23 @@ function Metadata(sample) {
 });
 }
 
+function init() {
+    
+      var selector = d3.select("#selDataset");
+      d3.json("/names").then((sampleNames) => {
+      var sampleNames = data.names;
+      sampleNames.forEach((sample) => {
+          selector
+            .append("option")
+            .text(sample)
+            .property("value", sample);
+        });
+        const firstSample = sampleNames[0];
+        Charts(firstSample);
+        Metadata(firstSample);
+      });
+    }
+    
+init();
+
       
