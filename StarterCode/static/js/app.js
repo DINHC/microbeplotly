@@ -1,10 +1,7 @@
 function Charts(sample) {
       d3.json("samples.json").then((data) => {
       var sample= data.samples;
-      
-      var resultsarray= md.filter(sampleobject => 
-      sampleobject.id == sample);
-      
+      var resultsarray= md.filter(sampleobject => sampleobject.id == sample);
       var result= resultsarray[0]
       var ids = result.otu_ids;
       var labels = result.otu_labels;
@@ -37,19 +34,30 @@ function Charts(sample) {
             text: labels,
             mode: "markers",
             colorscale: 'Rainbow',
-            marker: {
-                  color: ids,
-                  size: values,
-                    }
+            marker: {color: ids, size: values,}
             }];
 
       var bubbleshape = {
-            margin: { t: 0 },
+            margin: {t:0},
+            // padding: {auto},
             xaxis: { title: "OTU ID" },
             yaxis: {autorange: true},
-            hovermode: "closest",
-                
+            hovermode: "closest",     
       };
+
+function buildMetadata(sample) {
+      d3.json("samples.json").then((data) => {
+      var meta= data.metadata;
       
+      var results= meta.filter(sampleobject => sampleobject.id == sample);
+      var result= resultsarray[0]
+      var metasample = d3.select("#sample-metadata"); 
+      metasample.html("");
+      Object.entries(result).forEach(([key, value]) => {
+      metasample.append("div").style('word-wrap', 'break-word').text(`${key}: ${value}`);
+      });
+
+});
+}
 
       
