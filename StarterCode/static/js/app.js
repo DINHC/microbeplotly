@@ -14,11 +14,11 @@ function Charts(sample) {
 
       var bar =[
       {
-            y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
-            x:values.slice(0,10).reverse(),
-            text:labels.slice(0,10).reverse(),
-            type:"bar",
-            orientation:"h"
+            y: ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+            x: values.slice(0,10).reverse(),
+            text: labels.slice(0,10).reverse(),
+            type: "bar",
+            orientation: "h"
   
       }
       ];
@@ -29,4 +29,27 @@ function Charts(sample) {
             };
         
       Plotly.newPlot("bar", bar, barshape);
+
+      var bubble = [
+            {
+            x: ids,
+            y: values,
+            text: labels,
+            mode: "markers",
+            colorscale: 'Rainbow',
+            marker: {
+                  color: ids,
+                  size: values,
+                    }
+            }];
+
+      var bubbleshape = {
+            margin: { t: 0 },
+            xaxis: { title: "OTU ID" },
+            yaxis: {autorange: true},
+            hovermode: "closest",
+                
+      };
+      
+
       
