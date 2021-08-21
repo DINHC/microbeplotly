@@ -1,12 +1,13 @@
+
 function Charts(sample) {
-      d3.json("samples.json").then((data) => {
-      var sample= data.samples;
+      d3.json("/data/samples.json").then((data) => {
+      var sample = data.samples;
       var resultsarray= md.filter(sampleobject => sampleobject.id == sample);
-      var result= resultsarray[0]
+      var result = resultsarray[0]
       var ids = result.otu_ids;
       var labels = result.otu_labels;
       var values = result.sample_values;
-
+     
       var bar =[
       {
       y: ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
@@ -43,12 +44,14 @@ function Charts(sample) {
             hovermode: "closest",     
       };
       Plotly.newPlot("bubble", bubble, bubbleshape);
+});
+}
 
 function Metadata(sample) {
-      d3.json("samples.json").then((data) => {
+      d3.json("/data/samples.json").then((data) => {
       var meta= data.metadata;
 
-      var results= meta.filter(sampleobject => sampleobject.id == sample);
+      var resultsarray= meta.filter(sampleobject => sampleobject.id == sample);
       
       var result= resultsarray[0]
       var metasample = d3.select("#sample-metadata"); 
@@ -56,14 +59,12 @@ function Metadata(sample) {
       Object.entries(result).forEach(([key, value]) => {
       metasample.append("div").style('word-wrap', 'break-word').text(`${key}: ${value}`);
       });
-
 });
 }
 
 function init() {
-    
       var selector = d3.select("#selDataset");
-      d3.json("/names").then((sampleNames) => {
+      d3.json("./data/samples.json").then((sampleNames) => {
       var sampleNames = data.names;
       sampleNames.forEach((sample) => {
           selector
@@ -71,11 +72,11 @@ function init() {
             .text(sample)
             .property("value", sample);
         });
-        const firstSample = sampleNames[0];
-        Charts(firstSample);
-        Metadata(firstSample);
-      });
-    }
-    
+      const firstSample = sampleNames[0];
+      Charts(firstSample);
+      Metadata(firstSample);});} 
+function optionChanged(newSample){
+      Charts(newSample);
+      Metadata(newSample);
+      }
 init();
-})}
