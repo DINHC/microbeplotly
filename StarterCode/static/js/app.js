@@ -6,12 +6,10 @@ function Charts(sample) {
       var ids = result.otu_ids;
       var labels = result.otu_labels;
       var values = result.sample_values;
-      });
-      }
 
       var bar =[
       {
-            y: ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+      y: ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
             x: values.slice(0,10).reverse(),
             text: labels.slice(0,10).reverse(),
             type: "bar",
@@ -80,5 +78,4 @@ function init() {
     }
     
 init();
-
-      
+})}
