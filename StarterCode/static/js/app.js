@@ -15,14 +15,14 @@ function Charts(sample) {
             x: values.slice(0,10).reverse(),
             text: labels.slice(0,10).reverse(),
             type: "bar",
-            orientation: "h"
+            orientation: "horizontal"
   
       }
       ];
 
       var barshape = {
             title: "Top 10 Bacteria Found in Your Belly Button",
-            margin: { t: 50, l: 180 }
+            margin: { top: 50, left: 180 }
             };
         
       Plotly.newPlot("bar", bar, barshape);
@@ -33,23 +33,25 @@ function Charts(sample) {
             y: values,
             text: labels,
             mode: "markers",
-            colorscale: 'Rainbow',
+            colorscale: 'rainbow',
             marker: {color: ids, size: values,}
             }];
 
       var bubbleshape = {
-            margin: {t:0},
+            margin: {top:0},
             // padding: {auto},
             xaxis: { title: "OTU ID" },
             yaxis: {autorange: true},
             hovermode: "closest",     
       };
+      Plotly.newPlot("bubble", bubble, bubbleshape);
 
-function buildMetadata(sample) {
+function Metadata(sample) {
       d3.json("samples.json").then((data) => {
       var meta= data.metadata;
-      
+
       var results= meta.filter(sampleobject => sampleobject.id == sample);
+      
       var result= resultsarray[0]
       var metasample = d3.select("#sample-metadata"); 
       metasample.html("");
