@@ -1,30 +1,30 @@
-
 function Charts(sample) {
-      d3.json("/data/samples.json").then((data) => {
-      var sample = data.samples;
-      var resultsarray= md.filter(sampleobject => sampleobject.id == sample);
+      d3.json("samples.json").then((data) => {
+      console.log(data.features);
+      var samples = data.samples;
+      var resultsarray= samples.filter(sampleobject => sampleobject.id == sample);
       var result = resultsarray[0]
       var ids = result.otu_ids;
       var labels = result.otu_labels;
       var values = result.sample_values;
-     
+      
       var bar =[
       {
       y: ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
-            x: values.slice(0,10).reverse(),
-            text: labels.slice(0,10).reverse(),
-            type: "bar",
-            orientation: "horizontal"
-  
+      x: values.slice(0,10).reverse(),
+      text: labels.slice(0,10).reverse(),
+      type: "bar",
+      orientation: "horizontal"
       }
       ];
-
+      var bardata = [bar]
       var barshape = {
             title: "Top 10 Bacteria Found in Your Belly Button",
             margin: { top: 50, left: 180 }
             };
         
-      Plotly.newPlot("bar", bar, barshape);
+      plotly.newPlot("bar", bardata, barshape);
+
 
       var bubble = [
             {
@@ -35,7 +35,7 @@ function Charts(sample) {
             colorscale: 'rainbow',
             marker: {color: ids, size: values,}
             }];
-
+      var bubbledata = [bubble]
       var bubbleshape = {
             margin: {top:0},
             // padding: {auto},
@@ -43,12 +43,13 @@ function Charts(sample) {
             yaxis: {autorange: true},
             hovermode: "closest",     
       };
-      Plotly.newPlot("bubble", bubble, bubbleshape);
+      Plotly.newPlot("bubble", bubbledata, bubbleshape);
 });
 }
 
 function Metadata(sample) {
-      d3.json("/data/samples.json").then((data) => {
+      d3.json("samples.json").then((data) => {
+      console.log(data.features);
       var meta= data.metadata;
 
       var resultsarray= meta.filter(sampleobject => sampleobject.id == sample);
@@ -64,19 +65,20 @@ function Metadata(sample) {
 
 function init() {
       var selector = d3.select("#selDataset");
-      d3.json("./data/samples.json").then((sampleNames) => {
+      d3.json("samples.json").then((data) => {
+      console.log(data.features);      
       var sampleNames = data.names;
       sampleNames.forEach((sample) => {
           selector
             .append("option")
             .text(sample)
             .property("value", sample);
-        });
+      });
       const firstSample = sampleNames[0];
       Charts(firstSample);
       Metadata(firstSample);});} 
+
 function optionChanged(newSample){
-      Charts(newSample);
-      Metadata(newSample);
-      }
-init();
+Charts(newSample);
+Metadata(newSample);}
+init(); 
