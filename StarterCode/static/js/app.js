@@ -15,15 +15,14 @@ function Charts(sample) {
       text: labels.slice(0,10).reverse(),
       type: "bar",
       orientation: "horizontal"
-      }
-      ];
-      var bardata = [bar]
+      }];
+      // var bardata = [bar]
       var barshape = {
             title: "Top 10 Bacteria Found in Your Belly Button",
             margin: { top: 50, left: 180 }
             };
         
-      plotly.newPlot("bar", bardata, barshape);
+      Plotly.newPlot("bar", bar, barshape);
 
 
       var bubble = [
@@ -35,7 +34,7 @@ function Charts(sample) {
             colorscale: 'rainbow',
             marker: {color: ids, size: values,}
             }];
-      var bubbledata = [bubble]
+      // var bubbledata = [bubble]
       var bubbleshape = {
             margin: {top:0},
             // padding: {auto},
@@ -43,7 +42,7 @@ function Charts(sample) {
             yaxis: {autorange: true},
             hovermode: "closest",     
       };
-      Plotly.newPlot("bubble", bubbledata, bubbleshape);
+      Plotly.newPlot("bubble", bubble, bubbleshape);
 });
 }
 
