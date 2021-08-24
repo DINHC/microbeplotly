@@ -16,13 +16,18 @@ function Charts(sample) {
       type: "bar",
       // orientation: "horizontal"
       orientation: 'h',
-      // colorscale: 'rainbow'
-      color: 'rgb(158,202,225)'
-      }];
+      marker: {
+            color: 'rgb(158,202,225)',
+            opacity: 1.5,
+            line: {
+              color: 'rgb(8,48,107)',
+              width: 2
+            },
+      }}];
       // var bardata = [bar]
       var barshape = {
             title: "Top 10 Bacteria Found in Your Belly Button",
-            margin: { top: 50, left: 180 },
+            margin: { top: 80, left: 200 },
             };
         
       Plotly.newPlot("bar", bar, barshape);
