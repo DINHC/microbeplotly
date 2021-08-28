@@ -1,6 +1,5 @@
 # plot.ly-challenge
 
-DISCLAIMER: The github page is not loading the index.html static page and I was forced to get a screensht of the working page using liver server.
 
 Purpose: 
 
