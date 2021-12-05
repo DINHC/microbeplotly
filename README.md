@@ -27,5 +27,9 @@ HTML
  4. Create function for MetaData that would display individual's info from data
  5. Create init function to have firstsample as constant and to allow all plots and data to be updated 
  6. Create a index.html 
-    - Inside write code to house: title, Test Subject ID No. w/ option change, Demographic Info, bar chart, gauge chart, and bubble chart   
+    - Inside write code to house: title, Test Subject ID No. w/ option change, Demographic Info, bar chart, and bubble chart   
+
+![](screenshot/microbesitetop.png)
+
+![](screenshot/microbesitebottom.png)
  
